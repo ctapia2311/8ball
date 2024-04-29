@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Magic 8Ball</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+  <style>
+  body {
+    margin-top: 10%;
+    background-image: url(./assets/background.jpeg);
+    color: #fff;
+    text-align: center;
+    font-family: Quicksand;
+    font-size:large;
+  }
+
+  input {
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000;
+  }
+
+  h1{
+    color: white;
+    text-decoration: underline;
+  }
+
+  #runBtn {
+    background-color: grey;
+    color: #fff;
+    border-radius: 5px;
+    border: 2px solid #fff;
+  }
+
+  #restartBtn {
+    display: none;
+    background-color: grey;
+    color: #fff;
+    border-radius: 5px;
+    margin-left: 45%;
+    width: 50px;
+    border: 2px solid #fff;
+  }
+
+  img {
+    width: 125px;
+    border-radius: 12px;
+    border: 4px solid #fff;
+    margin-bottom: 15px;
+  }
+</style>
+</head>
+<body>
+<h1>Magic 8Ball</h1>
+<img src='./assets/8ball.jpeg' />
+  <div id='inputDiv'>
+
+  <p>Please enter your name:</p>
+  <input type=text id="username">
+  <p>What is your question:</p>
+  <input type=text id="userQuestion" />
+  <button id="runBtn">Run</button>
+  </div>
+  
+  <div id="answerDiv">
+    <p id="answer"></p>
+    <button id='restartBtn' onclick="window.location.reload()">Ask again?</button>
+  </div>
+  
+<script>
+const answerP = document.getElementById('answer');
+const myBtn = document.getElementById('runBtn');
+const inputDiv = document.getElementById('inputDiv');
+let inputDisplay = true;
+
+let answersArray = ['It is certain', 'It is Decidedly so', 'Without a doubt', 'Yes definitely', 'You may rely on it', 'As I see it, yes', 'Most likely', 'Outlook good', 'Yes', 'Signs point to yes', 'Reply hazy, try again later', 'Ask again later', 'Better not tell you now', 'Cannot predict now', 'Concentrate and ask again', 'Don\'t count on it', 'My reply is no', 'My sources say no', 'Outlook not so good', 'Very doubtful'];
+
+function answerFunction (){
+  let randomNum = Math.floor(Math.random() * 21);
+  let answer = answersArray[`${randomNum}`]
+  inputDiv.style.display = 'none';
+  let inputDisplay = false;
+  let user = document.getElementById('username').value;
+  let userQuestion = document.getElementById('userQuestion').value.toLowerCase();
+  answerP.innerHTML= `Hello ${user}, you are asking \"${userQuestion}\"? My answer is: ${answer}`;
+  answerP.style.textDecoration = 'underline';
+  if (inputDisplay == false){
+    restartBtn.style.display = 'block';
+  }
+}
+
+myBtn.addEventListener('click', answerFunction);
+</script>
+</body>
+</html>
